@@ -1,18 +1,22 @@
 package com.example.vikram.partyrobot;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,9 +29,12 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView up, down, left, right, connect, stop, btnCenter, btnInfo;
-    private TextView txtConStatus, waiting;
+    private TextView txtConStatus, waiting,txtStart, partyLogo;
     private LinearLayout playLayout;
     private ConstraintLayout startLayout;
+    private String upString = "u", downString = "d", leftString = "l", rightString = "r";
+
+    private Handler upHandler, downHandler, leftHandler, rightHandler;
 
 
     private final String DEVICE_ADDRESS="00:18:E4:34:C9:82";
@@ -46,14 +53,21 @@ public class MainActivity extends AppCompatActivity {
     boolean stopThread;
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        partyLogo = findViewById(R.id.party_logo);
+        Typeface cFont = Typeface.createFromAsset(getAssets(), "fonts/pricedown bl.ttf");
+        partyLogo.setTypeface(cFont);
+
         playLayout = findViewById(R.id.playLayout);
         playLayout.setVisibility(View.GONE);
         startLayout = findViewById(R.id.startLayout);
+
+        txtStart = findViewById(R.id.txtStart);
 
         up = findViewById(R.id.btnUp);
         down = findViewById(R.id.btnDown);
@@ -69,63 +83,165 @@ public class MainActivity extends AppCompatActivity {
         waiting = findViewById(R.id.txtWaiting);
         waiting.setVisibility(View.GONE);
 
+        upHandler = new Handler();
+        downHandler = new Handler();
+        leftHandler = new Handler();
+        rightHandler = new Handler();
+
         btnInfo.setOnClickListener((View) -> {
 
             Toast.makeText(MainActivity.this, "About Us", Toast.LENGTH_LONG).show();
 
         });
 
-        up.setOnClickListener((View) -> {
 
-            String string = "u";
-            try {
-                outputStream.write(string.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
+        //UP BUTTON CLICK
+        up.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                switch (motionEvent.getAction()){
+
+                    case MotionEvent.ACTION_DOWN :
+                        upHandler.postDelayed(mAction, 10);
+                        break;
+
+                    case MotionEvent.ACTION_UP :
+                        upHandler.removeCallbacks(mAction);
+
+                }
+
+                return true;
             }
 
-            //txtCenter.setText("up");
+            Runnable mAction = new Runnable() {
+                @Override
+                public void run() {
+
+                    try {
+                        outputStream.write(upString.getBytes());
+                        upHandler.postDelayed(this, 100);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
 
         });
 
-        left.setOnClickListener((View) -> {
 
-            String string = "l";
-            try {
-                outputStream.write(string.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
+
+        //DOWN BUTTON CLICK
+        down.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                switch (motionEvent.getAction()){
+
+                    case MotionEvent.ACTION_DOWN :
+                        downHandler.postDelayed(mAction, 10);
+                        break;
+
+                    case MotionEvent.ACTION_UP :
+                        downHandler.removeCallbacks(mAction);
+
+                }
+
+                return true;
             }
 
-            //txtCenter.setText("left");
+            Runnable mAction = new Runnable() {
+                @Override
+                public void run() {
+
+                    try {
+                        outputStream.write(downString.getBytes());
+                        downHandler.postDelayed(this, 100);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
 
         });
 
-        right.setOnClickListener((View) -> {
 
-            String string = "r";
-            try {
-                outputStream.write(string.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
+
+        //LEFT BUTTON CLICK
+        left.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                switch (motionEvent.getAction()){
+
+                    case MotionEvent.ACTION_DOWN :
+                        leftHandler.postDelayed(mAction, 10);
+                        break;
+
+                    case MotionEvent.ACTION_UP :
+                        leftHandler.removeCallbacks(mAction);
+
+                }
+
+                return true;
             }
 
-            //txtCenter.setText("right");
+            Runnable mAction = new Runnable() {
+                @Override
+                public void run() {
+
+                    try {
+                        outputStream.write(leftString.getBytes());
+                        leftHandler.postDelayed(this, 100);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
 
         });
 
-        down.setOnClickListener((View) -> {
 
-            String string = "d";
-            try {
-                outputStream.write(string.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
+
+        //RIGHT BUTTON CLICK
+        right.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                switch (motionEvent.getAction()){
+
+                    case MotionEvent.ACTION_DOWN :
+                        rightHandler.postDelayed(mAction, 10);
+                        break;
+
+                    case MotionEvent.ACTION_UP :
+                        rightHandler.removeCallbacks(mAction);
+
+                }
+
+                return true;
             }
 
-            //txtCenter.setText("down");
+            Runnable mAction = new Runnable() {
+                @Override
+                public void run() {
+
+                    try {
+                        outputStream.write(rightString.getBytes());
+                        rightHandler.postDelayed(this, 100);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
 
         });
+
+
     }
 
 
@@ -304,6 +420,66 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //NOT USE
+
+//    public void ExtraClickCode(){
+//
+//
+//
+//
+//        up.setOnClickListener((View) -> {
+//
+//            String string = "u";
+//            try {
+//                outputStream.write(string.getBytes());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            //txtCenter.setText("up");
+//
+//        });
+//
+//        left.setOnClickListener((View) -> {
+//
+//            String string = "l";
+//            try {
+//                outputStream.write(string.getBytes());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            //txtCenter.setText("left");
+//
+//        });
+//
+//        right.setOnClickListener((View) -> {
+//
+//            String string = "r";
+//            try {
+//                outputStream.write(string.getBytes());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            //txtCenter.setText("right");
+//
+//        });
+//
+//        down.setOnClickListener((View) -> {
+//
+//            String string = "d";
+//            try {
+//                outputStream.write(string.getBytes());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            //txtCenter.setText("down");
+//
+//        });
+//
+//    }
 
 
 

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Party Robot</string>
+    <string name="about_us_text">ARTech is a Registered firm under the Government of Maharashtra VAT Act ARTech is IS0 (9001:2015 Certified Company along with DAC (Dubai Aggradations Center).\n\n
+    We are pleased to introduce ourselves as a technical ground firm for engineering &amp; Science academics. The firm was established in 2009 but comes on document in June 2013. We basically deal with Industrial Projects, Home Security and Automation, Electronics Academics Kits. We also have Electronics Commercial Products for enhancing business such as Wireless Digital Display Boards, LED Display Boards and many more.\n\n
+    We believe in implementation of concept and had already guided more than 1000 engineers of different disciplines to accomplish their diploma, UG and PG projects as intern. Team ARTech binds brilliant minds of different fields having vast practical and Industrial experience along with high technical qualification.</string>
 </resources>

@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnInfo.setOnClickListener((View) -> {
 
-            Toast.makeText(MainActivity.this, "About Us", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
 
         });
 

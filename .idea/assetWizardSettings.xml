@@ -68,9 +68,9 @@
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="backgroundColor" value="7c7c7c" />
-                                      <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/party_robot_logo.png" />
-                                      <entry key="outputName" value="party_robot_logo" />
+                                      <entry key="cropped" value="true" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Pictures/party_app_logo.jpg" />
+                                      <entry key="outputName" value="main_logo" />
                                     </map>
                                   </option>
                                 </PersistentState>
